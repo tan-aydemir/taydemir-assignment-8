@@ -51,11 +51,36 @@ def do_experiments(start, end, step_num):
     for i, distance in enumerate(shift_distances, 1):
         X, y = generate_ellipsoid_clusters(distance=distance)
         # Implement: record all necessary information for each distance
-        raise NotImplementedError("Record all necessary information for each distance")
+        model, beta0, beta1, beta2 = fit_logistic_regression(X, y)
+        beta0_list.append(beta0)
+        beta2_list.append(beta2)
+        beta1_list.append(beta1)
+    
+        slope = -beta1 / beta2
+        intercept = -beta0 / beta2
+        slope_list.append(slope)
+        intercept_list.append(intercept)
+        
+        loss = 0
+        loss_list.append(loss)
+        
+        sample_data[distance] = (X, y, model, beta0, beta1, beta2)
+        
 
         # Implement: Plot the dataset
         plt.subplot(n_rows, n_cols, i)
-        raise NotImplementedError("Plot the dataset")
+        
+        # Create Scatter plot
+        plt.scatter(X[y == 0][:, 0], X[y == 0][:, 1], color="blue", label="Class 0", alpha=0.7)
+        plt.scatter(X[y == 1][:, 0], X[y == 1][:, 1], color="red", label="Class 1", alpha=0.7)
+        x_values = np.linspace(X[:, 0].min(), X[:, 0].max(), 200)
+        y_values = slope * x_values + intercept
+        plt.plot(x_values, y_values, color="black", label="Decision Boundary", linewidth=2)
+
+        plt.title(f"Shift distance = {distance:.3f}", fontsize=24)
+        plt.xlabel("x1")
+        plt.ylabel("x2")
+        plt.legend(fontsize=16)
 
         # Implement: Calculate and store logistic loss
         raise NotImplementedError("Calculate and store logistic loss")
