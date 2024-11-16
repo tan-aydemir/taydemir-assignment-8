@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory
 import os
-from logistic_regression_solution import do_experiments
+import matplotlib
+matplotlib.use('Agg')
+from logistic_regression import do_experiments
 
 app = Flask(__name__)
 
