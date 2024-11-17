@@ -14,6 +14,8 @@ In this assignment, you'll explore the effect of shifting clusters in a dataset 
 
 You can use the `Makefile` to install all dependencies. In your terminal, simply run:
 
+Link: https://youtu.be/h-lqv3a1aKw
+
 ```bash
 make install
 ```
